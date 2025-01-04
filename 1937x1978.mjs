@@ -1,7 +1,7 @@
 "use strict";
 // bu kod github.com/duckevils tarafından yazılmıştır.
 // discord.gg/1937 1978
-// duckevils rush ingiltereli zons ash noex
+// duckevils rush zons ash 
 import tls from 'tls';
 import WebSocket from 'ws';
 import extractJsonFromString from 'extract-json-from-string';
