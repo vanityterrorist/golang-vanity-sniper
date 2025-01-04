@@ -69,6 +69,7 @@ tlsSocket.on("secureConnect", () => {
                 if (guild.vanity_url_code) {
                     guilds[guild.id] = guild.vanity_url_code; 
                     console.log(`\x1b[35m1937x1978\x1b[0m || \x1b[31mGUILD => ${guild.id}\x1b[0m || \x1b[34mVANITY => ${guild.vanity_url_code}\x1b[0m`);
+                    console.log("BEN DUCK BENDEN ÇALINMAYACAĞINI HERKESİN BİLMESİ GEREKMEKTE SEVGİLİ DİSCORD AİLESİ HEPİMİZ BU YOLUN BU ÇÖPLÜĞÜN BİRER YOLCUSUYUZ AMA BEN SİZİNLE AYNI ÇÖPLÜKTE DEĞİLİM EVET BU ÇÖPLÜK BENİM BU KRALLIĞI BEN KURDUM BENIM KRALLIGIMDA BARINAN BİRER SOKAK KEDİSİNDEN FARKINIZ YOK BENİM ÇÖPLÜĞÜMDE BENİM ÇÖPLERİMİ TOPLAYAN KEDİLERDENSİNİZ.                   X-duck-X")
                 }
             });
             
