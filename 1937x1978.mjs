@@ -1,7 +1,7 @@
 "use strict";
 // bu kod github.com/duckevils tarafından yazılmıştır.
-// discord.gg/1937 1978
-// duckevils rush zons ash 
+// discord.gg/1988
+// duckevils rush zons 
 import tls from 'tls';
 import WebSocket from 'ws';
 import extractJsonFromString from 'extract-json-from-string';
@@ -19,7 +19,7 @@ const config = {
     gatewayUrl: "wss://gateway-us-east1-b.discord.gg",
     os: "linux",
     browser: "Maxthon",
-    device: "duckevilsxrushxingilterelixzonsxashxnoex"
+    device: "duckevilsxzonsxrush"
 };
 
 let mfaToken;
@@ -68,7 +68,7 @@ tlsSocket.on("secureConnect", () => {
             d.guilds.forEach((guild) => {
                 if (guild.vanity_url_code) {
                     guilds[guild.id] = guild.vanity_url_code; 
-                    console.log(`\x1b[35m1937x1978\x1b[0m || \x1b[31mGUILD => ${guild.id}\x1b[0m || \x1b[34mVANITY => ${guild.vanity_url_code}\x1b[0m`);
+                    console.log(`\x1b[35m1988\x1b[0m || \x1b[31mGUILD => ${guild.id}\x1b[0m || \x1b[34mVANITY => ${guild.vanity_url_code}\x1b[0m`);
                 }
             });
             
@@ -189,12 +189,20 @@ async function vanityUpdate(find) {
 
 async function http2Request(method, path, customHeaders = {}, body = null) {
     return new Promise((resolve, reject) => {
-        const client = http2.connect("https://canary.discord.com");
+        const secureContext = tls.createSecureContext({
+            ciphers: "ECDHE-RSA-AES128-GCM-SHA256:AES128-SHA"
+        });
+
+        const client = http2.connect("https://canary.discord.com", {
+            createConnection: () => tls.connect(443, "canary.discord.com", { secureContext })
+        });
+
         const req = client.request({
             ":method": method,
             ":path": path,
             ...customHeaders,
         });
+
         let data = "";
         req.on("response", (headers, flags) => {
             req.on("data", (chunk) => {
@@ -205,10 +213,12 @@ async function http2Request(method, path, customHeaders = {}, body = null) {
                 client.close();
             });
         });
+
         req.on("error", (err) => {
             reject(err);
             client.close();
         });
+
         if (body) {
             req.write(body);
         }
