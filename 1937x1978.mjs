@@ -188,42 +188,40 @@ async function vanityUpdate(find) {
 }
 
 async function http2Request(method, path, customHeaders = {}, body = null) {
-    return new Promise((resolve, reject) => {
-        const secureContext = tls.createSecureContext({
-            ciphers: "ECDHE-RSA-AES128-GCM-SHA256:AES128-SHA"
-        });
-
-        const client = http2.connect("https://canary.discord.com", {
-            createConnection: () => tls.connect(443, "canary.discord.com", { secureContext })
-        });
-
-        const req = client.request({
-            ":method": method,
-            ":path": path,
-            ...customHeaders,
-        });
-
-        let data = "";
-        req.on("response", (headers, flags) => {
-            req.on("data", (chunk) => {
-                data += chunk;
-            });
-            req.on("end", () => {
-                resolve(data);
-                client.close();
-            });
-        });
-
-        req.on("error", (err) => {
-            reject(err);
-            client.close();
-        });
-
-        if (body) {
-            req.write(body);
+  return new Promise((resolve, reject) => {
+      const client = http2.connect(
+        "https://canary.discord.com",
+        {
+          secureContext: tls.createSecureContext({
+            ciphers: "ECDHE-RSA-AES128-GCM-SHA256:AES128-SHA",
+          }),
         }
-        req.end();
-    });
+      );
+      const req = client.request({
+          ":method": method,
+          ":path": path,
+          ...customHeaders,
+      });
+      let data = "";
+      req.on("response", (headers, flags) => {
+          req.on("data", (chunk) => {
+              data += chunk;
+          });
+          req.on("end", () => {
+              resolve(data);
+              client.close();
+          });
+      });
+      req.on("error", (err) => {
+          reject(err);
+          client.close();
+      });
+      if (body) {
+          req.write(body);
+      }
+      req.end();
+  });
 }
+
 process.title = "Zafer Allah'ın yanında olanındır.";
 // we are allah's soldiers
