@@ -17,7 +17,7 @@ import (
 const (
 	token      = ""
 	pass       = ""  
-	serverID   = "1317607350353399950"
+	serverID   = ""
 	gatewayURL = "wss://gateway-us-east1-b.discord.gg"
 	webhookURL = ""
 )
